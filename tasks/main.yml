@@ -1,0 +1,63 @@
+---
+# tasks file for apache-webserver
+
+- name: "Installing Apache Webserver"
+  apt: name={{ item }}
+  with_items: 
+  - apache2
+
+- name: "Making Directory for SSL Files"
+  file:
+    path: /etc/apache2/ssl
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0660
+    recurse: yes
+
+- name: "Add the needed SSL Cert Files"
+  copy:
+    content: '{{ item.content }}'
+    dest:    '{{ item.dest }}'
+    owner:  root
+    group:  www-data
+    mode:   '{{ item.mode }}'
+  no_log: true
+  with_items:
+    - content: |
+        {{ ssl_certificate_file }}
+      dest: /etc/apache2/ssl/ssl_certificate_file
+      mode: '0640'
+    - content: |
+        {{ ssl_certificate_key_file }}       
+      dest: /etc/apache2/ssl/ssl_certificate_key_file
+      mode: '0640'
+    - content: |
+        {{ ssl_ca_certificate_file }}        
+      dest: /etc/apache2/ssl/ssl_ca_certificate_file
+      mode: '0640'      
+
+- name: "Adding Default Apache Config File"
+  template: src=../templates/000-default.conf dest=/etc/apache2/sites-available/000-default.conf owner=www-data group=www-data mode=0644
+
+- name: "Adding Default SSL Apache Config File"
+  template: src=../templates/default-ssl.conf dest=/etc/apache2/sites-available/default-ssl.conf owner=www-data group=www-data mode=0644
+
+- name: "Symlinking default-ssl Apache Config File"
+  file:
+    src: /etc/apache2/sites-available/default-ssl.conf
+    dest: /etc/apache2/sites-enabled/000-default-ssl.conf
+    owner: www-data
+    group: www-data
+    mode: 0660
+    state: link
+
+- name: "Enabling Needed Apache Modules"
+  apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+     - ssl
+     - rewrite
+  notify: 
+    - restart-apache

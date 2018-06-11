@@ -1,0 +1,12 @@
+# Handlers - just like a normal task expect only executed if triggered by another Ansible task
+
+## Good for service restarts (when config files are changed by another Ansible tasks) and other 
+##  tasks that you don't want to occur every time an Ansible playbook is run
+
+## The task calling the handler must use the "notify:" directive and a list of handlers to be called
+## Example:
+## notify:
+## - name-of-handler1-to-call
+## - name-of-handler2-to-call
+
+## the "name-of-handler1-to-call" above must *exactly* match the value in the "name:" of the handler   

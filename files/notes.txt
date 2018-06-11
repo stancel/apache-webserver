@@ -1,0 +1,2 @@
+# Any script tasks can reference scripts in roles/x/files/ without having to path them relatively or absolutely
+

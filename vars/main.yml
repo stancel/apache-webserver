@@ -1,0 +1,23 @@
+---
+# vars file for apache-webserver
+
+#####     Required Variables      #####
+# Uncomment these and fill in appropriate values unless passing from a higher precedence
+
+
+# The Fully Qualified Domain Name you'll be using for the server you are creating.
+server_fqdn: "yourdomainhere.com"
+
+# The Apache Server Alias directive
+server_alias: "*.yourdomainhere.com"
+
+# Path to your SSL Cert file
+ssl_certificate_file: "{{ lookup('file', '~/.ssh/my_ssl_cert.crt') }}" 
+
+# Path to your private key
+ssl_certificate_key_file: "{{ lookup('file', '~/.ssh/my_privatekey.key') }}" 
+
+# Path to the Certificate Authority Cert file
+ssl_ca_certificate_file: "{{ lookup('file', '~/.ssh/ca_cert.crt') }}" 
+    
+    
