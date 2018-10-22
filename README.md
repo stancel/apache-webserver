@@ -21,23 +21,23 @@ A description of the settable variables for this role should go here, including 
 
 The Fully Qualified Domain Name you'll be using for the server you are creating. 
 ```
-	server_fqdn: "yourdomainhere.com"
+	apache_webserver_server_fqdn: "yourdomainhere.com"
 ```
 The Apache Server Alias directive
 ```
-	server_alias: "*.yourdomainhere.com"
+	apache_webserver_server_alias: "*.yourdomainhere.com"
 ```
 Path to your SSL Cert file
 ```
-	ssl_certificate_file: "{{ lookup('file', '~/.ssh/my_ssl_cert.crt') }}"
+	apache_webserver_ssl_certificate_file: "{{ lookup('file', '~/.ssh/my_ssl_cert.crt') }}"
 ```
 Path to your private key
 ```
-	ssl_certificate_key_file: "{{ lookup('file', '~/.ssh/my_privatekey.key') }}"
+	apache_webserver_ssl_certificate_key_file: "{{ lookup('file', '~/.ssh/my_privatekey.key') }}"
 ```
 Path to the Certificate Authority Cert file
 ```
-	ssl_ca_certificate_file: "{{ lookup('file', '~/.ssh/ca_cert.crt') }}"
+	apache_webserver_ssl_ca_certificate_file: "{{ lookup('file', '~/.ssh/ca_cert.crt') }}"
 ```
 
 Dependencies
@@ -62,11 +62,11 @@ or
 
 	- hosts: your_server
 	  vars:
-		server_fqdn: "yourdomainhere.com"
-		server_alias: "*.yourdomainhere.com"
-		ssl_certificate_file: "{{ lookup('file', '~/.ssh/my_ssl_cert.crt') }}"
-		ssl_certificate_key_file: "{{ lookup('file', '~/.ssh/my_privatekey.key') }}" 
-		ssl_ca_certificate_file: "{{ lookup('file', '~/.ssh/ca_cert.crt') }}"
+		apache_webserver_server_fqdn: "yourdomainhere.com"
+		apache_webserver_server_alias: "*.yourdomainhere.com"
+		apache_webserver_ssl_certificate_file: "{{ lookup('file', '~/.ssh/my_ssl_cert.crt') }}"
+		apache_webserver_ssl_certificate_key_file: "{{ lookup('file', '~/.ssh/my_privatekey.key') }}" 
+		apache_webserver_ssl_ca_certificate_file: "{{ lookup('file', '~/.ssh/ca_cert.crt') }}"
 	  roles:
 	    - { role: stancel.apache-webserver }
 
@@ -78,4 +78,4 @@ BSD
 Author Information
 ------------------
 
-Brad Stancel
+[Brad Stancel](https://github.com/stancel)

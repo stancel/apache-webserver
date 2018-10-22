@@ -25,15 +25,15 @@
   no_log: true
   with_items:
     - content: |
-        {{ ssl_certificate_file }}
+        {{ apache_webserver_ssl_certificate_file }}
       dest: /etc/apache2/ssl/ssl_certificate_file
       mode: '0640'
     - content: |
-        {{ ssl_certificate_key_file }}       
+        {{ apache_webserver_ssl_certificate_key_file }}       
       dest: /etc/apache2/ssl/ssl_certificate_key_file
       mode: '0640'
     - content: |
-        {{ ssl_ca_certificate_file }}        
+        {{ apache_webserver_ssl_ca_certificate_file }}        
       dest: /etc/apache2/ssl/ssl_ca_certificate_file
       mode: '0640'      
 
